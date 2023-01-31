@@ -1,0 +1,29 @@
+{
+    "folders": [{
+      "path": "."
+    }],
+    "settings": {
+      "editor.formatOnSave": false,
+      "editor.tabSize": 2,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
+      "eslint.options": {
+        "extensions": [
+          ".ts",
+          ".js"
+        ]
+      },
+      "eslint.validate": [
+        "tsx",
+        "ts",
+        "html",
+        "javascript",
+        "typescript",
+      ],
+    },
+    "extensions": {
+      "recommendations": []
+    }
+  }
+  

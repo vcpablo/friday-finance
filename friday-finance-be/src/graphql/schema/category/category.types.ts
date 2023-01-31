@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express'
 
 export const Category = gql`
   scalar Date
@@ -14,5 +14,4 @@ export const Category = gql`
   type Query {
     categories: [Category!]!
   }
-`;
-
+`
