@@ -10,13 +10,18 @@
     },
     "eslint.options": {
       "extensions": [
-        ".ts",
-        ".js"
+        ".vue",
+        ".js",
+        ".html"
       ]
     },
+    "eslint.workingDirectories": [
+      {
+        "mode": "auto"
+      }
+    ],
     "eslint.validate": [
-      "tsx",
-      "ts",
+      "vue",
       "html",
       "javascript",
       "typescript",

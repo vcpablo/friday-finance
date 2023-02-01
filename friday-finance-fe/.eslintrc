@@ -1,0 +1,16 @@
+{
+  "extends": ["@nuxt/eslint-config", "plugin:vue/vue3-essential", "eslint:recommended", "@vue/prettier"],
+  "rules": {
+    "no-console": "off",
+    "no-debugger": "off",
+    "prettier/prettier": ["error", {
+      "semi": false,
+      "singleQuote": true,
+      "trailingComma": "none"
+    }],
+    "vue/multi-word-component-names": ["off"],
+    "vue/no-reserved-component-names": ["off"],
+    "vue/script-setup-uses-vars": ["error"],
+    "no-unused-vars": ["error"]
+  }
+}

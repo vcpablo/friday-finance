@@ -1,8 +1,3 @@
 <template>
-  <h1>Test</h1>
-  <!-- <Tutorial /> -->
+  <h1>Test 2</h1>
 </template>
-
-<script setup>
-
-</script>
