@@ -1,33 +1,34 @@
 {
-  "folders": [{
-    "path": "."
-  }],
-  "settings": {
-    "editor.formatOnSave": false,
-    "editor.tabSize": 2,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+    "folders": [{
+      "path": "."
+    }],
+    "settings": {
+      "editor.formatOnSave": false,
+      "editor.tabSize": 2,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
+      "eslint.options": {
+        "extensions": [
+          ".vue",
+          ".js",
+          ".html"
+        ]
+      },
+      "eslint.workingDirectories": [
+        {
+          "mode": "auto"
+        }
+      ],
+      "eslint.validate": [
+        "vue",
+        "html",
+        "javascript",
+        "typescript",
+      ],
     },
-    "eslint.options": {
-      "extensions": [
-        ".vue",
-        ".js",
-        ".html"
-      ]
-    },
-    "eslint.workingDirectories": [
-      {
-        "mode": "auto"
-      }
-    ],
-    "eslint.validate": [
-      "vue",
-      "html",
-      "javascript",
-      "typescript",
-    ],
-  },
-  "extensions": {
-    "recommendations": []
+    "extensions": {
+      "recommendations": []
+    }
   }
-}
+  
