@@ -21,5 +21,8 @@ const accounts = (
 }
 
 export default {
-  accounts
+  Query: {
+    accounts
+  },
+  Mutation: {}
 }

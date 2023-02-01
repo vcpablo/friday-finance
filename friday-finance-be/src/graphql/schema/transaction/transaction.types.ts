@@ -4,6 +4,11 @@ export const Transaction = gql`
   scalar Date
   scalar JSON
 
+  input TransactionInput {
+    id: String!
+    categoryId: String!
+  }
+
   type Transaction {
     id: String!
     accountId: String!
@@ -26,4 +31,15 @@ export const Transaction = gql`
       filter: JSON
     ): [Transaction!]!
   }
+
+  type Mutation {
+    updateTransaction(transaction: TransactionInput): Transaction!
+  }
 `
+
+export type TransactionInput = {
+  transaction: {
+    id: string
+    categoryId: string
+  }
+}

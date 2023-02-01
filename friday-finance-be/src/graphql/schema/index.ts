@@ -12,9 +12,14 @@ import transactionResolvers from './transaction/transaction.resolvers'
 const typeDefs = [BaseTypes, Account, Category, Transaction]
 const resolvers = {
   Query: {
-    ...accountResolvers,
-    ...categoryResolvers,
-    ...transactionResolvers
+    ...accountResolvers.Query,
+    ...categoryResolvers.Query,
+    ...transactionResolvers.Query
+  },
+  Mutation: {
+    ...accountResolvers.Mutation,
+    ...categoryResolvers.Mutation,
+    ...transactionResolvers.Mutation
   }
 }
 

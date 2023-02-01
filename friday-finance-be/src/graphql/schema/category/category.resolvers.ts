@@ -5,6 +5,7 @@ import {
   PAGINATION_DEFAULT_SKIP,
   PAGINATION_DEFAULT_TAKE
 } from '../../../constants'
+import { CategoryInput } from './category.types'
 
 const categories = (
   _parent: any,
@@ -20,6 +21,20 @@ const categories = (
   })
 }
 
+const createCategory = (
+  _parent: any,
+  input: CategoryInput,
+  context: Context
+): Promise<Category> =>
+  context.prisma.category.create({
+    data: input.category
+  })
+
 export default {
-  categories
+  Query: {
+    categories
+  },
+  Mutation: {
+    createCategory
+  }
 }

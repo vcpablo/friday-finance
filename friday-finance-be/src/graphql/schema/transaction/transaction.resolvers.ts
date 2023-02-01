@@ -6,6 +6,7 @@ import {
   PAGINATION_DEFAULT_TAKE
 } from '../../../constants'
 import { appendWhere } from './transaction.filters'
+import { TransactionInput } from './transaction.types'
 
 const transactions = async (
   _parent: any,
@@ -31,6 +32,32 @@ const transactions = async (
   return output
 }
 
+const updateTransaction = (
+  _parent: any,
+  input: TransactionInput,
+  context: Context
+): Promise<Transaction> => {
+  const {
+    transaction: { id, categoryId }
+  } = input
+
+  return context.prisma.transaction.update({
+    include: {
+      account: true,
+      category: true
+    },
+    where: {
+      id
+    },
+    data: { categoryId }
+  })
+}
+
 export default {
-  transactions
+  Query: {
+    transactions
+  },
+  Mutation: {
+    updateTransaction
+  }
 }

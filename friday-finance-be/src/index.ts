@@ -4,7 +4,7 @@ import { context } from './graphql/context'
 
 const server = new ApolloServer({
   schema,
-  context,
+  context
 })
 
 server.listen().then(({ url }) => {
