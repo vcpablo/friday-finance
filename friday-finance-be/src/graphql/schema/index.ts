@@ -1,14 +1,15 @@
-import { makeExecutableSchema } from "graphql-tools"
-import { Account } from "./account/account.types"
-import accountResolvers from "./account/account.resolvers"
+import { makeExecutableSchema } from '@graphql-tools/schema'
+import BaseTypes from './base.types'
+import { Account } from './account/account.types'
+import accountResolvers from './account/account.resolvers'
 
-import { Category } from "./category/category.types"
-import categoryResolvers from "./category/category.resolvers"
+import { Category } from './category/category.types'
+import categoryResolvers from './category/category.resolvers'
 
-import { Transaction } from "./transaction/transaction.types"
-import transactionResolvers from "./transaction/transaction.resolvers"
+import { Transaction } from './transaction/transaction.types'
+import transactionResolvers from './transaction/transaction.resolvers'
 
-const typeDefs = [ Account, Category, Transaction ]
+const typeDefs = [BaseTypes, Account, Category, Transaction]
 const resolvers = {
   Query: {
     ...accountResolvers,
@@ -19,5 +20,5 @@ const resolvers = {
 
 export const schema = makeExecutableSchema({
   resolvers,
-  typeDefs,
+  typeDefs
 })

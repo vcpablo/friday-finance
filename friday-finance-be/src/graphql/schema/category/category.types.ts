@@ -12,6 +12,6 @@ export const Category = gql`
   }
 
   type Query {
-    categories: [Category!]!
+    categories(pagination: PaginationInput): [Category!]!
   }
 `

@@ -12,6 +12,6 @@ export const Account = gql`
   }
 
   type Query {
-    accounts: [Account!]!
+    accounts(pagination: PaginationInput): [Account!]!
   }
 `

@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express'
 
 export const Transaction = gql`
   scalar Date
+  scalar JSON
 
   type Transaction {
     id: String!
@@ -18,6 +19,11 @@ export const Transaction = gql`
   }
 
   type Query {
-    transactions: [Transaction!]!
+    transactions(
+      pagination: PaginationInput
+      sort: JSON
+      query: String
+      filter: JSON
+    ): [Transaction!]!
   }
 `
