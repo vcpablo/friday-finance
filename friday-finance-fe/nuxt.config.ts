@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@apollo/client', 'ts-invariant/process']
   },
-  modules: ['@nuxtjs/i18n'],
+  modules: ['@nuxtjs/i18n', 'nuxt-icon'],
   i18n: {
     locales: [
       {

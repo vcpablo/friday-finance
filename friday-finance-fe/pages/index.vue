@@ -1,14 +1,10 @@
 <template>
-  <AccountSelect
-    v-model="account"
-    :label="$t('transactions.account')"
-    :placeholder="$t('transactions.noFilterApplied')"
-  />
+  <Layout>
+    <TransactionsTable />
+  </Layout>
 </template>
 
 <script setup>
-import AccountSelect from '~/components/Transactions/TransactionsTable/TransactionsTableFilter/AccountSelect.vue'
-import { ref } from 'vue'
-
-const account = ref('')
+import Layout from './_layout.vue'
+import TransactionsTable from '~/components/Transactions/TransactionsTable/TransactionsTable.vue'
 </script>

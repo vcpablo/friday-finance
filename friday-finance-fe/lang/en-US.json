@@ -2,6 +2,16 @@
   "transactions": {
     "transactions": "Transactions",
     "account": "Account",
-    "noFilterApplied": "No filter applied"
+    "noFilterApplied": "No filter applied",
+    "noResults": "No results",
+    "reference": "Reference",
+    "category": "Category",
+    "date": "Date",
+    "amount": "Amount",
+    "noReferenceProvided": "No reference provided"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next"
   }
 }
