@@ -23,13 +23,18 @@ export const Transaction = gql`
     updatedAt: Date
   }
 
+  type PaginatedTransaction {
+    data: [Transaction!]!
+    total: Int
+  }
+
   type Query {
     transactions(
       pagination: PaginationInput
       sort: JSON
       query: String
       filter: JSON
-    ): [Transaction!]!
+    ): [PaginatedTransaction!]!
   }
 
   type Mutation {

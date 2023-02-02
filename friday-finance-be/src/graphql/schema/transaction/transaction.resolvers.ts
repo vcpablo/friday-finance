@@ -1,6 +1,6 @@
 import { Transaction } from '@prisma/client'
 import { Context } from '../../context'
-import { BaseInput } from '../../types'
+import { BaseInput, PaginatedOutput } from '../../types'
 import {
   PAGINATION_DEFAULT_SKIP,
   PAGINATION_DEFAULT_TAKE
@@ -12,13 +12,15 @@ const transactions = async (
   _parent: any,
   input: BaseInput,
   context: Context
-): Promise<Transaction[]> => {
+): Promise<PaginatedOutput[]> => {
   const { sort = [], query = '', pagination = {}, filter = {} } = input
 
   const { skip = PAGINATION_DEFAULT_SKIP, take = PAGINATION_DEFAULT_TAKE } =
     pagination
 
-  const output = await context.prisma.transaction.findMany({
+  const where = appendWhere(query, filter)
+
+  const data = await context.prisma.transaction.findMany({
     skip,
     take,
     include: {
@@ -26,10 +28,17 @@ const transactions = async (
       category: true
     },
     orderBy: sort,
-    ...appendWhere(query, filter)
+    ...where
   })
 
-  return output
+  const total = where ? data.length : await context.prisma.transaction.count()
+
+  return [
+    {
+      data,
+      total
+    }
+  ]
 }
 
 const updateTransaction = (
