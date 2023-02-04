@@ -9,6 +9,10 @@ export const Transaction = gql`
     categoryId: String!
   }
 
+  input TransactionByIdInput {
+    id: String!
+  }
+
   type Transaction {
     id: String!
     accountId: String!
@@ -35,6 +39,8 @@ export const Transaction = gql`
       query: String
       filter: JSON
     ): [PaginatedTransaction!]!
+
+    transactionById(id: String): Transaction
   }
 
   type Mutation {
@@ -47,4 +53,8 @@ export type TransactionInput = {
     id: string
     categoryId: string
   }
+}
+
+export type TransactionByIdInput = {
+  id: string
 }

@@ -6,7 +6,9 @@ import {
   PAGINATION_DEFAULT_TAKE
 } from '../../../constants'
 import { appendWhere } from './transaction.filters'
-import { TransactionInput } from './transaction.types'
+import { TransactionInput, TransactionByIdInput } from './transaction.types'
+import { GraphQLError } from 'graphql'
+import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 
 const transactions = async (
   _parent: any,
@@ -62,9 +64,38 @@ const updateTransaction = (
   })
 }
 
+const transactionById = async (
+  _parent: any,
+  input: TransactionByIdInput,
+  context: Context
+): Promise<Transaction> => {
+  const { id } = input
+
+  const transaction = await context.prisma.transaction.findUnique({
+    include: {
+      account: true,
+      category: true
+    },
+    where: {
+      id
+    }
+  })
+
+  if (!transaction) {
+    throw new GraphQLError(ReasonPhrases.NOT_FOUND, {
+      extensions: {
+        code: StatusCodes.NOT_FOUND
+      }
+    })
+  }
+
+  return transaction
+}
+
 export default {
   Query: {
-    transactions
+    transactions,
+    transactionById
   },
   Mutation: {
     updateTransaction
