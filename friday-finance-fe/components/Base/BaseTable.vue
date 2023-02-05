@@ -1,19 +1,9 @@
 <template>
   <div class="flex flex-col">
-    <div class="sm:-mx-6 lg:-mx-8">
+    <div class="sm:-mx-6 lg:-mx-8 overflow-x-auto">
       <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
         <div>
-          <!-- <div v-if="loading" class="animate-pulse">
-            
-            <div class="h-8 bg-gray-300 mb-3 rounded"></div>
-            <div class="h-8 bg-gray-200 mb-3 rounded"></div>
-            <div class="h-8 bg-gray-300 mb-3 rounded"></div>
-            <div class="h-8 bg-gray-200 mb-3 rounded"></div>
-          </div> -->
-          <div v-if="items.length === 0" class="text-center">
-            {{ $t('transactions.noResults') }}
-          </div>
-          <table v-else class="min-w-full table-auto">
+          <table class="min-w-full table-auto">
             <thead class="border-b">
               <tr>
                 <th
@@ -46,7 +36,27 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in items" :key="item.id" class="border-b">
+              <tr v-if="loading">
+                <td :colspan="columns.length">
+                  <div class="flex items-center justify-center gap-3 py-5">
+                    <Icon name="heroicons:arrow-path" class="animate-spin" />
+                    {{ $t('common.loading') }}
+                  </div>
+                </td>
+              </tr>
+              <tr v-else-if="items.length === 0">
+                <td :colspan="columns.length">
+                  <div class="flex items-center justify-center gap-3 py-5">
+                    {{ $t('common.noResults') }}
+                  </div>
+                </td>
+              </tr>
+              <tr
+                v-for="item in items"
+                :key="item.id"
+                class="border-b"
+                :class="{ 'blur-sm': loading }"
+              >
                 <td
                   v-for="column in columns"
                   :key="`${item.id}__${column.key}`"

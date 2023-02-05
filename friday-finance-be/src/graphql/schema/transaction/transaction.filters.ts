@@ -1,23 +1,23 @@
 import { Prisma } from '@prisma/client'
 import { FilterInput } from '../../types'
 
-const appendStartDateFilter = (filter: FilterInput) =>
-  filter.startDate
+const appendStartingMonthFilter = (filter: FilterInput) =>
+  filter.startingMonth
     ? [
         {
           date: {
-            gte: new Date(filter.startDate)
+            gte: new Date(filter.startingMonth)
           }
         }
       ]
     : []
 
-const appendEndDateFilter = (filter: FilterInput) =>
-  filter.endDate
+const appendEndingMonthFilter = (filter: FilterInput) =>
+  filter.endingMonth
     ? [
         {
           date: {
-            lte: new Date(filter.endDate)
+            lte: new Date(filter.endingMonth)
           }
         }
       ]
@@ -36,6 +36,34 @@ const appendAmountFilter = (query: string) => {
       ]
     : []
 }
+
+const appendAccountFilter = (filter: FilterInput) =>
+  filter.account
+    ? [
+        {
+          account: {
+            name: {
+              contains: String(filter.account),
+              mode: Prisma.QueryMode.insensitive
+            }
+          }
+        }
+      ]
+    : []
+
+const appendBankFilter = (filter: FilterInput) =>
+  filter.bank
+    ? [
+        {
+          account: {
+            bank: {
+              contains: String(filter.bank),
+              mode: Prisma.QueryMode.insensitive
+            }
+          }
+        }
+      ]
+    : []
 
 const appendQuery = (query: string) =>
   query
@@ -76,17 +104,28 @@ const appendQuery = (query: string) =>
     : []
 
 const appendWhere = (query: string, filter: FilterInput) => {
-  const OR = [
-    ...appendStartDateFilter(filter),
-    ...appendEndDateFilter(filter),
-    ...appendAmountFilter(query),
-    ...appendQuery(query)
+  const OR = appendQuery(query)
+
+  const AND = [
+    ...appendStartingMonthFilter(filter),
+    ...appendEndingMonthFilter(filter),
+    ...appendAccountFilter(filter),
+    ...appendBankFilter(filter),
+    ...appendAmountFilter(query)
   ]
 
-  return OR.length > 0
+  if (OR.length > 0) {
+    return {
+      where: {
+        AND: [{ OR }, ...AND]
+      }
+    }
+  }
+
+  return AND.length > 0
     ? {
         where: {
-          OR
+          AND
         }
       }
     : null

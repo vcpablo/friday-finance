@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex justify-center mt-5">
+  <nav class="flex justify-center mt-8">
     <ul class="inline-flex">
       <li>
         <a
@@ -12,7 +12,7 @@
       </li>
       <li v-for="page in pages" :key="page">
         <a
-          class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+          class="px-3 py-2 leading-tight text-gray-500 bg-white border border-l-0 border-gray-300 hover:bg-gray-100 hover:text-gray-700"
           :class="{
             'cursor-pointer': page !== '...',
             'bg-gray-600 text-white hover:bg-gray-800 hover:text-white':
@@ -24,7 +24,7 @@
       </li>
       <li>
         <a
-          class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 cursor-pointer"
+          class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-l-0 border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 cursor-pointer"
           :class="{ 'cursor-not-allowed': isLastPage }"
           @click="handleNextPage"
           >{{ $t('pagination.next') }}</a

@@ -4,15 +4,14 @@
     :label="label"
     :placeholder="placeholder"
     :disabled="loading"
-    :options="result?.accounts || []"
-    primary-key="name"
+    :options="result?.banks || []"
     @update:model-value="handleUpdateModelValue"
   />
 </template>
 
 <script setup>
 import { useQuery } from '@vue/apollo-composable'
-import { GET_ACCOUNTS } from '~/graphql/accounts'
+import { GET_BANKS } from '~/graphql/accounts'
 
 defineProps({
   modelValue: {
@@ -31,7 +30,7 @@ defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const { loading, result } = useQuery(GET_ACCOUNTS)
+const { loading, result } = useQuery(GET_BANKS)
 
 const handleUpdateModelValue = (value) => emit('update:modelValue', value)
 </script>

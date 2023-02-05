@@ -16,13 +16,27 @@ const accounts = (
 
   return context.prisma.account.findMany({
     skip,
-    take
+    take,
+    distinct: ['name']
   })
+}
+
+const banks = async (
+  _parent: any,
+  input: any,
+  context: Context
+): Promise<any[]> => {
+  const accounts = await context.prisma.account.findMany({
+    distinct: ['bank']
+  })
+
+  return accounts.map(({ bank }) => ({ name: bank }))
 }
 
 export default {
   Query: {
-    accounts
+    accounts,
+    banks
   },
   Mutation: {}
 }

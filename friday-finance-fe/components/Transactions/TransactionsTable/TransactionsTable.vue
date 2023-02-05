@@ -1,6 +1,11 @@
 <template>
   <h1 class="font-bold mb-3">{{ $t('transactions.transactions') }}</h1>
-  <!-- <pre>{{ result.transactions }}</pre> -->
+  <TransactionsTableFilter
+    :query="query"
+    :filter="filter"
+    @update:filter="handleUpdateFilter"
+    @update:query="handleUpdateQuery"
+  />
 
   <BaseTable
     :columns="columns"
@@ -55,6 +60,8 @@ import { ref } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { useI18n } from 'vue-i18n'
 
+import TransactionsTableFilter from './TransactionsTableFilter/TransactionsTableFilter.vue'
+
 import { GET_TRANSACTIONS } from '~/graphql/transactions'
 import {
   BASE_PAGINATION_DEFAULT_CURRENT_PAGE,
@@ -82,15 +89,6 @@ const columns = [
   }
 ]
 
-// const items = [
-//   {
-//     reference: 'Reference',
-//     category: 'Category',
-//     date: new Date(),
-//     amount: 'US$ 20.00'
-//   }
-// ]
-
 const sortBy = ref({
   key: 'date',
   direction: 'desc'
@@ -100,6 +98,14 @@ const pagination = ref({
   currentPage: BASE_PAGINATION_DEFAULT_CURRENT_PAGE,
   perPage: BASE_PAGINATION_DEFAULT_PER_PAGE,
   total: 0
+})
+
+const query = ref('')
+const filter = ref({
+  bank: null,
+  account: null,
+  startingMonth: null,
+  endingMonth: null
 })
 
 const { loading, result, refetch, onResult } = useQuery(GET_TRANSACTIONS, {
@@ -121,11 +127,6 @@ const handleUpdateSortBy = ({ key, direction }) => {
 const handleUpdateCurrentPage = ({ currentPage }) => {
   pagination.value.currentPage = currentPage
 
-  console.log({
-    take: pagination.value.perPage,
-    skip: (currentPage - 1) * pagination.value.perPage
-  })
-
   refetch({
     pagination: {
       take: pagination.value.perPage,
@@ -133,4 +134,31 @@ const handleUpdateCurrentPage = ({ currentPage }) => {
     }
   })
 }
+
+const handleUpdateFilter = (value) => {
+  console.log(value)
+  pagination.value.currentPage = 1
+  console.log('filter', value)
+  filter.value = value
+
+  handleRefetch()
+}
+
+const handleUpdateQuery = (value) => {
+  console.log('query', value)
+  pagination.value.currentPage = 1
+  query.value = value
+
+  handleRefetch()
+}
+
+const handleRefetch = () =>
+  refetch({
+    pagination: {
+      take: pagination.value.perPage,
+      skip: (pagination.value.currentPage - 1) * pagination.value.perPage
+    },
+    filter: filter.value,
+    query: query.value
+  })
 </script>

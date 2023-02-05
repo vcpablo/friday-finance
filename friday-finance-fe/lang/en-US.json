@@ -1,14 +1,22 @@
 {
+  "common": {
+    "loading": "Loading...",
+    "noResults": "No results"
+  },
   "transactions": {
     "transactions": "Transactions",
     "account": "Account",
     "noFilterApplied": "No filter applied",
-    "noResults": "No results",
     "reference": "Reference",
     "category": "Category",
     "date": "Date",
     "amount": "Amount",
-    "noReferenceProvided": "No reference provided"
+    "noReferenceProvided": "No reference provided",
+    "search": "Search",
+    "bank": "Bank",
+    "startingMonth": "Starting month",
+    "endingMonth": "Ending month",
+    "searchPlaceholder": "Search by bank, account, reference, category, date, amount, currency..."
   },
   "pagination": {
     "previous": "Previous",

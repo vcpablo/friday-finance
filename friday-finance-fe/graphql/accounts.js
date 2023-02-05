@@ -10,4 +10,12 @@ const GET_ACCOUNTS = gql`
   }
 `
 
-export { GET_ACCOUNTS }
+const GET_BANKS = gql`
+  query Banks($pagination: PaginationInput) {
+    banks(pagination: $pagination) {
+      name
+    }
+  }
+`
+
+export { GET_ACCOUNTS, GET_BANKS }

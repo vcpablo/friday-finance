@@ -11,7 +11,12 @@ export const Account = gql`
     updatedAt: Date
   }
 
+  type Bank {
+    name: String!
+  }
+
   type Query {
     accounts(pagination: PaginationInput): [Account!]!
+    banks(pagination: PaginationInput): [Bank!]!
   }
 `
