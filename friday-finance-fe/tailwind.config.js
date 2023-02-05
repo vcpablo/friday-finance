@@ -6,8 +6,7 @@ module.exports = {
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
     './nuxt.config.{js,ts}',
-    './app.vue',
-    'node_modules/tailvue/dist/tailvue.es.js'
+    './app.vue'
   ],
   theme: {
     extend: {}

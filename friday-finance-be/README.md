@@ -1,6 +1,15 @@
 # Friday Finance Backend
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Preparation
+Create an `.env` and add the content found on the `.env.default` file.
+Update the values according to your local configuration
+
+## Setup 
+
+### Starting the database docker
+```bash
+docker-compose up -d
+```
 
 ## Setup
 
@@ -44,5 +53,3 @@ yarn dev
 ```bash
 yarn lint
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

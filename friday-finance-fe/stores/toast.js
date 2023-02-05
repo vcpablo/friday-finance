@@ -11,22 +11,29 @@ export const useToastStore = defineStore('friday-finance/toast', {
     }
   }),
   actions: {
-    success(message, timeout) {
+    info(message, { timeout } = {}) {
+      this.options.type = TOAST_TYPES.INFO
+      this.show({ message, timeout })
+    },
+
+    success(message, { timeout } = {}) {
       this.options.type = TOAST_TYPES.SUCCESS
       this.show({ message, timeout })
     },
 
-    error(message, { timeout }) {
+    error(message, { timeout } = {}) {
       this.options.type = TOAST_TYPES.ERROR
       this.show({ message, timeout })
     },
 
-    warning(message, { timeout }) {
+    warning(message, { timeout } = {}) {
       this.options.type = TOAST_TYPES.WARNING
       this.show({ message, timeout })
     },
 
     show({ message, timeout = 5000 }) {
+      this.isOpen = false
+
       this.options = {
         ...this.options,
         message,

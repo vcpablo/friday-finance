@@ -1,6 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {}
+    }
+  },
   runtimeConfig: {
     // The private keys which are only available server-side
     apiUrl: 'http://localhost:4000/graphql',
@@ -9,30 +15,30 @@ export default defineNuxtConfig({
       apiUrl: 'http://localhost:4000/graphql'
     }
   },
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {}
-    }
-  },
   build: {
-    transpile: ['@apollo/client', 'ts-invariant/process']
+    transpile: ['@apollo/client']
   },
-  modules: ['@nuxtjs/i18n', 'nuxt-icon', '@pinia/nuxt'],
-  i18n: {
-    locales: [
+  modules: [
+    [
+      '@nuxtjs/i18n',
       {
-        code: 'en',
-        file: 'en-US.json'
-      },
-      {
-        code: 'pt-BR',
-        file: 'pt-BR.json'
+        locales: [
+          {
+            code: 'en',
+            file: 'en-US.json'
+          },
+          {
+            code: 'pt-BR',
+            file: 'pt-BR.json'
+          }
+        ],
+
+        lazy: true,
+        langDir: 'lang',
+        defaultLocale: 'en'
       }
     ],
-
-    lazy: true,
-    langDir: 'lang',
-    defaultLocale: 'en'
-  }
+    'nuxt-icon',
+    '@pinia/nuxt'
+  ]
 })

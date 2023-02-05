@@ -1,11 +1,31 @@
 # Friday Finance Fullstack Application
 
+## Requirements
+You'll need these in order to run this full project locally:
+
+- [NodeJS](https://nodejs.org/en/download/)
+- [Yarn](https://yarnpkg.com/getting-started/install)
+- [Docker](https://www.docker.com/products/docker-desktop/)
+
+## Preparation
+Create an `.env` and add the content found on the `.env.default` file.
+Update the values according to your local configuration
+
+### Link environment variables
+```
+yarn db:generate
+```
+
 ## Setup 
 
-Make sure to install the dependencies:
+### Starting the database docker
+```bash
+cd friday-finance-be && docker-compose up -d
+```
+
+### Installing all dependencies
 
 ```bash
-# yarn
 yarn install
 ```
 

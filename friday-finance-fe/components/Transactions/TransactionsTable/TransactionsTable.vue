@@ -127,7 +127,8 @@ const { loading, result, refetch, onResult } = useQuery(GET_TRANSACTIONS, {
   pagination: {
     take: pagination.value.perPage,
     skip: Math.ceil(pagination.value.total / pagination.value.perPage)
-  }
+  },
+  sort: [{ [sortBy.value.key]: sortBy.value.direction }]
 })
 
 const { mutate } = useMutation(UPDATE_TRANSACTION)
@@ -140,7 +141,7 @@ const handleUpdateSortBy = ({ key, direction }) => {
   sortBy.value.key = key
   sortBy.value.direction = direction
 
-  toast.success('Success')
+  handleRefetch()
 }
 
 const handleUpdateCurrentPage = ({ currentPage }) => {
@@ -175,6 +176,7 @@ const handleRefetch = () =>
       skip: (pagination.value.currentPage - 1) * pagination.value.perPage
     },
     filter: filter.value,
+    sort: [{ [sortBy.value.key]: sortBy.value.direction }],
     query: query.value
   })
 
