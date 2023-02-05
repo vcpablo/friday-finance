@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@apollo/client', 'ts-invariant/process']
   },
-  modules: ['@nuxtjs/i18n', 'nuxt-icon'],
+  modules: ['@nuxtjs/i18n', 'nuxt-icon', '@pinia/nuxt'],
   i18n: {
     locales: [
       {
@@ -30,6 +30,7 @@ export default defineNuxtConfig({
         file: 'pt-BR.json'
       }
     ],
+
     lazy: true,
     langDir: 'lang',
     defaultLocale: 'en'

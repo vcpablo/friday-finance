@@ -15,6 +15,7 @@
     :pagination="pagination"
     @update:sort-by="handleUpdateSortBy"
     @update:current-page="handleUpdateCurrentPage"
+    @click:row="handleClickRow"
   >
     <template #header-amount="{ column }">
       <div class="text-right">{{ column.label }}</div>
@@ -53,22 +54,33 @@
       </div>
     </template>
   </BaseTable>
+
+  <TransactionDetailsModal
+    v-if="transactionDetailsId"
+    :transaction-id="transactionDetailsId"
+    :open="isTransactionDetailsModalOpen"
+    @save="handleTransactionDetailsModalSave"
+    @close="handleTransactionDetailsModalClose"
+  />
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
+import { useMutation, useQuery } from '@vue/apollo-composable'
 import { useI18n } from 'vue-i18n'
+import { useToastStore } from '~/stores/toast'
 
 import TransactionsTableFilter from './TransactionsTableFilter/TransactionsTableFilter.vue'
+import TransactionDetailsModal from './TransactionDetailsModal/TransactionDetailsModal.vue'
 
-import { GET_TRANSACTIONS } from '~/graphql/transactions'
+import { GET_TRANSACTIONS, UPDATE_TRANSACTION } from '~/graphql/transactions'
 import {
   BASE_PAGINATION_DEFAULT_CURRENT_PAGE,
   BASE_PAGINATION_DEFAULT_PER_PAGE
-} from '~~/constants'
+} from '~/constants'
 
 const i18n = useI18n()
+const toast = useToastStore()
 
 const columns = [
   {
@@ -108,12 +120,17 @@ const filter = ref({
   endingMonth: null
 })
 
+const isTransactionDetailsModalOpen = ref(false)
+const transactionDetailsId = ref(null)
+
 const { loading, result, refetch, onResult } = useQuery(GET_TRANSACTIONS, {
   pagination: {
     take: pagination.value.perPage,
     skip: Math.ceil(pagination.value.total / pagination.value.perPage)
   }
 })
+
+const { mutate } = useMutation(UPDATE_TRANSACTION)
 
 onResult(({ data }) => {
   pagination.value.total = data.transactions[0].total
@@ -122,6 +139,8 @@ onResult(({ data }) => {
 const handleUpdateSortBy = ({ key, direction }) => {
   sortBy.value.key = key
   sortBy.value.direction = direction
+
+  toast.success('Success')
 }
 
 const handleUpdateCurrentPage = ({ currentPage }) => {
@@ -136,16 +155,13 @@ const handleUpdateCurrentPage = ({ currentPage }) => {
 }
 
 const handleUpdateFilter = (value) => {
-  console.log(value)
   pagination.value.currentPage = 1
-  console.log('filter', value)
   filter.value = value
 
   handleRefetch()
 }
 
 const handleUpdateQuery = (value) => {
-  console.log('query', value)
   pagination.value.currentPage = 1
   query.value = value
 
@@ -161,4 +177,35 @@ const handleRefetch = () =>
     filter: filter.value,
     query: query.value
   })
+
+const handleClickRow = (transaction) => {
+  transactionDetailsId.value = transaction.id
+  isTransactionDetailsModalOpen.value = true
+}
+
+const handleTransactionDetailsModalSave = async ({
+  transactionId,
+  categoryId
+}) => {
+  try {
+    await mutate({
+      transaction: {
+        id: transactionId,
+        categoryId
+      }
+    })
+
+    toast.success(i18n.t('transactions.savedSuccessfully'))
+    handleRefetch()
+    handleTransactionDetailsModalClose()
+  } catch (error) {
+    console.error(error)
+    toast.error(i18n.t('transactions.error'))
+  }
+}
+
+const handleTransactionDetailsModalClose = () => {
+  isTransactionDetailsModalOpen.value = false
+  transactionDetailsId.value = null
+}
 </script>

@@ -132,33 +132,9 @@ watch(
 )
 
 const queryModel = computed({
-  set: debounce((value) => {
-    console.log(value)
-    emit('update:query', value)
-  }, 500),
+  set: debounce((value) => emit('update:query', value), 500),
   get() {
     return props.query
   }
 })
-
-// const filterModel = computed({
-//   set: debounce((value) => {
-//     console.log(value)
-//     emit('update:filter', value)
-//   }, 500),
-//   get() {
-//     return props.filter
-//   }
-// })
-
-// const handleFilterInput = debounce((field, value) => {
-//   emit('update:filter', {
-//     ...props.filter,
-//     [field]: value
-//   })
-// }, 500)
-
-// const handleQueryInput = debounce((event) => {
-//   emit('update:query', event.target.value)
-// }, 500)
 </script>

@@ -38,10 +38,7 @@
             <tbody>
               <tr v-if="loading">
                 <td :colspan="columns.length">
-                  <div class="flex items-center justify-center gap-3 py-5">
-                    <Icon name="heroicons:arrow-path" class="animate-spin" />
-                    {{ $t('common.loading') }}
-                  </div>
+                  <BaseLoading />
                 </td>
               </tr>
               <tr v-else-if="items.length === 0">
@@ -54,8 +51,9 @@
               <tr
                 v-for="item in items"
                 :key="item.id"
-                class="border-b"
+                class="border-b hover:bg-gray-100 hover:cursor-pointer"
                 :class="{ 'blur-sm': loading }"
+                @click="handleClickRow(item)"
               >
                 <td
                   v-for="column in columns"
@@ -109,7 +107,7 @@ const props = defineProps({
   loading: Boolean
 })
 
-const emit = defineEmits(['update:sortBy', 'update:currentPage'])
+const emit = defineEmits(['update:sortBy', 'update:currentPage', 'click:row'])
 
 const isSortedByAsc = computed(() => props.sortBy.direction === 'asc')
 const isSortedByDesc = computed(() => props.sortBy.direction === 'desc')
@@ -121,4 +119,6 @@ const toggleSortBy = (key) => {
 
 const handleUpdateCurrentPage = (currentPage) =>
   emit('update:currentPage', { currentPage })
+
+const handleClickRow = (item) => emit('click:row', item)
 </script>

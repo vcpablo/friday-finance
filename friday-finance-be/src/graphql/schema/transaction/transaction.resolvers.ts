@@ -48,6 +48,7 @@ const updateTransaction = (
   input: TransactionInput,
   context: Context
 ): Promise<Transaction> => {
+  console.log(input)
   const {
     transaction: { id, categoryId }
   } = input

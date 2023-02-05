@@ -1,7 +1,11 @@
 {
   "common": {
     "loading": "Loading...",
-    "noResults": "No results"
+    "noResults": "No results",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit"
   },
   "transactions": {
     "transactions": "Transactions",
@@ -16,7 +20,11 @@
     "bank": "Bank",
     "startingMonth": "Starting month",
     "endingMonth": "Ending month",
-    "searchPlaceholder": "Search by bank, account, reference, category, date, amount, currency..."
+    "searchPlaceholder": "Search by bank, account, reference, category, date, amount, currency...",
+    "transactionDetails": "Transaction details",
+    "savedSuccessfully": "Transaction saved successfully",
+    "error": "Error saving transaction",
+    "selectCategory": "Select a category"
   },
   "pagination": {
     "previous": "Previous",

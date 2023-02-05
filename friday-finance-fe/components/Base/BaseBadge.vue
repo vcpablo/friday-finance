@@ -1,7 +1,11 @@
 <template>
-  <span class="text-sm font-medium p-3 py-3 rounded" :style="style">
+  <div
+    class="text-sm font-medium rounded inline-block"
+    :class="`p-${size}`"
+    :style="style"
+  >
     {{ label }}
-  </span>
+  </div>
 </template>
 
 <script setup>
@@ -14,6 +18,10 @@ const props = defineProps({
   color: {
     type: String,
     default: ''
+  },
+  size: {
+    type: Number,
+    default: 3
   }
 })
 
