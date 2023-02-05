@@ -9,10 +9,11 @@
     "build:fe": "cd friday-finance-fe && yarn build",
     "generate:fe": "cd friday-finance-fe && yarn generate",
     "preview": "cd friday-finance-fe && yarn preview",
+    "dev:be": "cd friday-finance-be && yarn dev",
     "db:reset": "cd friday-finance-be && yarn db:reset",
     "db:migrate": "cd friday-finance-be && yarn db:migrate",
     "db:seed": "cd friday-finance-be && yarn db:seed",
-    "lint:be": "cd friday-finance-be && yarn eslint --fix"
+    "postinstall": "concurrently \"cd friday-finance-fe && yarn install\" \"cd friday-finance-be && yarn install && yarn db:migrate && db:reset\""
   },
   "devDependencies": {
     "concurrently": "^7.6.0"
