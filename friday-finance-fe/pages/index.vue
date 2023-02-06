@@ -6,5 +6,5 @@
 
 <script setup>
 import Layout from './_layout.vue'
-import TransactionsTable from '~/components/Transactions/TransactionsTable/TransactionsTable.vue'
+import TransactionsTable from '@/components/Transactions/TransactionsTable/TransactionsTable.vue'
 </script>

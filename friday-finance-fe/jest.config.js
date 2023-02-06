@@ -3,7 +3,8 @@ module.exports = {
   testEnvironment: 'jsdom',
   moduleFileExtensions: ['js', 'vue'],
   moduleNameMapper: {
-    '^@/(.*)': '<rootDir>/$1'
+    '^@/(.*)': '<rootDir>/$1',
+    '^~/(.*)': '<rootDir>/$1'
   },
   transform: {
     '^.+\\.(js)$': 'babel-jest',

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { TOAST_TYPES } from '~/constants'
+import { TOAST_TYPES } from '@/constants'
 
 export const useToastStore = defineStore('friday-finance/toast', {
   state: () => ({

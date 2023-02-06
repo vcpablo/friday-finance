@@ -92,7 +92,7 @@ import { useQuery } from '@vue/apollo-composable'
 
 import CategorySelect from './CategorySelect.vue'
 
-import { GET_TRANSACTION_BY_ID } from '~/graphql/transactions'
+import { GET_TRANSACTION_BY_ID } from '@/graphql/transactions'
 
 const props = defineProps({
   open: Boolean,

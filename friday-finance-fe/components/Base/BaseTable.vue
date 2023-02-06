@@ -57,7 +57,7 @@
               <tr
                 v-for="item in items"
                 :key="item.id"
-                :data-testid="`base-table-cell__${item.id}`"
+                :data-testid="`base-table-row__${item.id}`"
                 class="border-b hover:bg-gray-100 hover:cursor-pointer"
                 :class="{ 'blur-sm': loading }"
                 @click="handleClickRow(item)"
@@ -65,6 +65,7 @@
                 <td
                   v-for="column in columns"
                   :key="`${item.id}__${column.key}`"
+                  :data-testid="`base-table-cell__${item.id}__${column.key}`"
                   class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
                 >
                   <slot

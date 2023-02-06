@@ -12,7 +12,7 @@
 
 <script setup>
 import { useQuery } from '@vue/apollo-composable'
-import { GET_ACCOUNTS } from '~/graphql/accounts'
+import { GET_ACCOUNTS } from '@/graphql/accounts'
 
 defineProps({
   modelValue: {

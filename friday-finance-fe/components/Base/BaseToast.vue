@@ -25,8 +25,8 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useToastStore } from '~/stores/toast'
-import { TOAST_TYPES, TOAST_ICONS } from '~/constants'
+import { useToastStore } from '@/stores/toast'
+import { TOAST_TYPES, TOAST_ICONS } from '@/constants'
 
 const toast = useToastStore()
 

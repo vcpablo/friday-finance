@@ -68,16 +68,16 @@
 import { ref } from 'vue'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 import { useI18n } from 'vue-i18n'
-import { useToastStore } from '~/stores/toast'
+import { useToastStore } from '@/stores/toast'
 
 import TransactionsTableFilter from './TransactionsTableFilter/TransactionsTableFilter.vue'
 import TransactionDetailsModal from './TransactionDetailsModal/TransactionDetailsModal.vue'
 
-import { GET_TRANSACTIONS, UPDATE_TRANSACTION } from '~/graphql/transactions'
+import { GET_TRANSACTIONS, UPDATE_TRANSACTION } from '@/graphql/transactions'
 import {
   BASE_PAGINATION_DEFAULT_CURRENT_PAGE,
   BASE_PAGINATION_DEFAULT_PER_PAGE
-} from '~/constants'
+} from '@/constants'
 
 const i18n = useI18n()
 const toast = useToastStore()

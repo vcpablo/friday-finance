@@ -36,11 +36,11 @@
 
 <script setup>
 import { computed } from 'vue'
-import { paginate } from '~/utils/pagination'
+import { paginate } from '@/utils/pagination'
 import {
   BASE_PAGINATION_DEFAULT_CURRENT_PAGE,
   BASE_PAGINATION_DEFAULT_PER_PAGE
-} from '~/constants'
+} from '@/constants'
 
 const props = defineProps({
   currentPage: {

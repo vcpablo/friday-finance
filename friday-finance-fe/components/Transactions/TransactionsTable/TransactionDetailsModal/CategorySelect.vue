@@ -12,7 +12,7 @@
 
 <script setup>
 import { useQuery } from '@vue/apollo-composable'
-import { GET_CATEGORIES } from '~/graphql/categories'
+import { GET_CATEGORIES } from '@/graphql/categories'
 
 defineProps({
   modelValue: {
