@@ -93,7 +93,8 @@ const columns = [
   },
   {
     key: 'date',
-    label: i18n.t('transactions.date')
+    label: i18n.t('transactions.date'),
+    sortable: true
   },
   {
     key: 'amount',

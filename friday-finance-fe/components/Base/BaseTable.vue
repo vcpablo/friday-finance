@@ -9,39 +9,45 @@
                 <th
                   v-for="column in columns"
                   :key="column.key"
+                  :data-testid="`base-table-column__${column.key}`"
                   scope="col"
                   class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                 >
                   <slot :name="`header-${column.key}`" :column="column">
                     <div class="flex gap-2 items-center">
                       {{ column.label }}
-                      <template v-if="!column.sortable">
-                        <div
-                          class="cursor-pointer"
-                          @click="toggleSortBy(column.key)"
-                        >
-                          <Icon
-                            v-if="isSortedByAsc"
-                            name="heroicons:chevron-up-20-solid"
-                          ></Icon>
-                          <Icon
-                            v-if="isSortedByDesc"
-                            name="heroicons:chevron-down-20-solid"
-                          ></Icon>
-                        </div>
-                      </template>
+                      <div
+                        v-if="column.sortable"
+                        :data-testid="`base-table-sorting__${column.key}`"
+                        class="cursor-pointer"
+                        @click="toggleSortBy(column.key)"
+                      >
+                        <Icon
+                          v-if="isSortedByAsc"
+                          :data-testid="`base-table-sorting-asc__${column.key}`"
+                          name="heroicons:chevron-up-20-solid"
+                        ></Icon>
+                        <Icon
+                          v-if="isSortedByDesc"
+                          :data-testid="`base-table-sorting-desc__${column.key}`"
+                          name="heroicons:chevron-down-20-solid"
+                        ></Icon>
+                      </div>
                     </div>
                   </slot>
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr v-if="loading">
+              <tr v-if="loading" data-testid="base-table-loading">
                 <td :colspan="columns.length">
                   <BaseLoading />
                 </td>
               </tr>
-              <tr v-else-if="items.length === 0">
+              <tr
+                v-else-if="items.length === 0"
+                data-testid="base-table-no-results"
+              >
                 <td :colspan="columns.length">
                   <div class="flex items-center justify-center gap-3 py-5">
                     {{ $t('common.noResults') }}
@@ -51,6 +57,7 @@
               <tr
                 v-for="item in items"
                 :key="item.id"
+                :data-testid="`base-table-cell__${item.id}`"
                 class="border-b hover:bg-gray-100 hover:cursor-pointer"
                 :class="{ 'blur-sm': loading }"
                 @click="handleClickRow(item)"

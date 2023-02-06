@@ -1,4 +1,9 @@
 {
+    "root": true,
+    "env": {
+      "browser": true,
+      "node": true
+    },
     "extends": ["@nuxt/eslint-config", "plugin:vue/vue3-essential", "eslint:recommended", "@vue/prettier"],
     "rules": {
       "no-console": "off",
@@ -12,5 +17,16 @@
       "vue/no-reserved-component-names": ["off"],
       "vue/script-setup-uses-vars": ["error"],
       "no-unused-vars": ["error"]
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   }
