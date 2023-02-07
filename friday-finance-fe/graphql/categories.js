@@ -10,4 +10,14 @@ const GET_CATEGORIES = gql`
   }
 `
 
-export { GET_CATEGORIES }
+const CREATE_CATEGORY = gql`
+  mutation CreateCategory($category: CategoryInput) {
+    createCategory(category: $category) {
+      id
+      name
+      color
+    }
+  }
+`
+
+export { GET_CATEGORIES, CREATE_CATEGORY }

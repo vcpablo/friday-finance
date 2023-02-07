@@ -17,7 +17,12 @@ const categories = (
 
   return context.prisma.category.findMany({
     skip,
-    take
+    take,
+    orderBy: [
+      {
+        name: 'asc'
+      }
+    ]
   })
 }
 

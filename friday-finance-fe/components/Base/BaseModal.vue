@@ -4,7 +4,7 @@
       <div
         class="absolute inset-0 flex flex-col items-center justify-center bg-gray-700 bg-opacity-50"
       >
-        <div class="max-w-5xl bg-white rounded-md shadow-xl">
+        <div class="min-w-5xl bg-white rounded-md shadow-xl">
           <div class="p-6">
             <div class="flex items-center justify-between">
               <h3 class="text-2xl">
@@ -26,15 +26,24 @@
           <div class="flex justify-end px-6 pb-6">
             <button
               class="px-6 py-2 text-blue-800 border border-blue-600 rounded"
+              :disabled="disabled || loading"
               @click="handleClose"
             >
               {{ $t('common.close') }}
             </button>
             <button
               class="px-6 py-2 ml-2 text-blue-100 bg-blue-600 rounded"
+              :disabled="disabled || loading"
               @click="handleSave"
             >
-              {{ $t('common.save') }}
+              <Icon
+                v-if="loading"
+                name="heroicons:arrow-path"
+                class="animate-spin"
+              />
+              <span v-else>
+                {{ $t('common.save') }}
+              </span>
             </button>
           </div>
         </div>
@@ -46,6 +55,8 @@
 <script setup>
 defineProps({
   open: Boolean,
+  disabled: Boolean,
+  loading: Boolean,
   title: {
     type: String,
     default: ''

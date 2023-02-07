@@ -44,6 +44,16 @@
                   <BaseLoading />
                 </td>
               </tr>
+              <tr v-else-if="error">
+                <td :colspan="columns.length" class="p-3">
+                  <div
+                    class="flex items-center gap-2 justify-center p-3 rounded bg-red-50 text-red-800 border border-red-700"
+                  >
+                    <Icon name="heroicons:x-circle-20-solid" />
+                    {{ error }}
+                  </div>
+                </td>
+              </tr>
               <tr
                 v-else-if="items.length === 0"
                 data-testid="base-table-no-results"
@@ -81,6 +91,7 @@
           </table>
 
           <BasePagination
+            v-if="pagination.total / pagination.perPage > 1"
             :current-page="pagination.currentPage"
             :per-page="pagination.perPage"
             :total="pagination.total"
@@ -111,6 +122,10 @@ const props = defineProps({
   pagination: {
     type: Object,
     default: () => ({})
+  },
+  error: {
+    type: String,
+    default: ''
   },
   loading: Boolean
 })

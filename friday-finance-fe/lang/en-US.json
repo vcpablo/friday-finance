@@ -24,7 +24,17 @@
     "transactionDetails": "Transaction details",
     "savedSuccessfully": "Transaction saved successfully",
     "error": "Error saving transaction",
-    "selectCategory": "Select a category"
+    "selectCategory": "Select a category",
+    "addCategory": "Add Category"
+  },
+  "categories": {
+    "name": "Name",
+    "color": "Color",
+    "createdSuccessfully": "Category created successfully",
+    "createError": "Error creating category",
+    "validation": {
+      "name": "Please, provide a name"
+    }
   },
   "pagination": {
     "previous": "Previous",

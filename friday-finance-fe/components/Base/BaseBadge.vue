@@ -25,8 +25,10 @@ const props = defineProps({
   }
 })
 
+console.log(props.color)
+
 const style = computed(() => ({
-  background: props.color,
+  backgroundColor: props.color,
   border: '1px solid #EDEDED'
 }))
 </script>

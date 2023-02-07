@@ -11,6 +11,7 @@
     :columns="columns"
     :items="result?.transactions[0]?.data || []"
     :loading="loading"
+    :error="error?.message"
     :sort-by="sortBy"
     :pagination="pagination"
     @update:sort-by="handleUpdateSortBy"
@@ -124,13 +125,16 @@ const filter = ref({
 const isTransactionDetailsModalOpen = ref(false)
 const transactionDetailsId = ref(null)
 
-const { loading, result, refetch, onResult } = useQuery(GET_TRANSACTIONS, {
-  pagination: {
-    take: pagination.value.perPage,
-    skip: Math.ceil(pagination.value.total / pagination.value.perPage)
-  },
-  sort: [{ [sortBy.value.key]: sortBy.value.direction }]
-})
+const { loading, result, refetch, onResult, error } = useQuery(
+  GET_TRANSACTIONS,
+  {
+    pagination: {
+      take: pagination.value.perPage,
+      skip: Math.ceil(pagination.value.total / pagination.value.perPage)
+    },
+    sort: [{ [sortBy.value.key]: sortBy.value.direction }]
+  }
+)
 
 const { mutate } = useMutation(UPDATE_TRANSACTION)
 

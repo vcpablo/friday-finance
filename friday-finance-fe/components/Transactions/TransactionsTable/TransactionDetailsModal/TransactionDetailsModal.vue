@@ -8,8 +8,8 @@
     <BaseLoading v-if="loading" />
     <template v-else>
       <div class="flex items-center justify-between gap-20">
-        <div class="text-2xl flex flex-col gap-2">
-          <div class="flex items-center gap-3">
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-3 text-2xl">
             <span v-if="result?.transactionById?.reference">
               {{ result?.transactionById?.reference }}
             </span>
@@ -18,20 +18,14 @@
             </span>
           </div>
           <div class="flex items-center gap-2">
-            <div v-if="isEditingCategory" class="flex flex-col gap-2">
-              <CategorySelect
-                v-model="categoryId"
-                required
-                :placeholder="$t('transactions.selectCategory')"
-              />
-              <button
-                class="text-xs text-red-500 bg-white rounded flex gap-1 items-center self-end"
-                @click="handleCancelEditCategory"
-              >
-                <Icon name="heroicons:x-mark" />
-                {{ $t('common.cancel') }}
-              </button>
-            </div>
+            <CategorySelect
+              v-if="isEditingCategory"
+              v-model="categoryId"
+              required
+              :placeholder="$t('transactions.selectCategory')"
+              allow-create
+              @cancel-edit="handleCancelEditCategory"
+            />
             <BaseBadge
               v-else
               :label="result?.transactionById?.category.name"
